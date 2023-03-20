@@ -2,15 +2,16 @@ import * as React from "react";
 import Document, { Html, Head, Main, NextScript, DocumentProps, DocumentContext } from "next/document";
 import createEmotionServer from "@emotion/server/create-instance";
 import { AppType } from "next/app";
-import theme, { roboto } from "@/utils/theme";
 import createEmotionCache from "@/utils/createEmotionCache";
 import { MyAppProps } from "@/pages/_app";
+import { ColorModeContext, roboto } from "@/context/ColorModeContext";
 
 interface MyDocumentProps extends DocumentProps {
     emotionStyleTags: JSX.Element[];
 }
 
 export default function MyDocument({ emotionStyleTags }: MyDocumentProps) {
+    const theme = React.useContext(ColorModeContext).theme;
     return (
         <Html lang="en" className={roboto.className}>
             <Head>

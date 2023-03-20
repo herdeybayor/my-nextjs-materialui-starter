@@ -1,32 +1,27 @@
-import * as React from "react";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import Link from "@/components/Link";
-import ProTip from "@/components/ProTip";
-import Copyright from "@/components/Copyright";
+import { ColorModeContext } from "@/context/ColorModeContext";
+import { PhotoCamera } from "@mui/icons-material";
+import { Paper, Button, IconButton, Typography, Switch } from "@mui/material";
+import * as React from "react";
 
 export default function Home() {
+    const { mode, toggleColorMode } = React.useContext(ColorModeContext);
     return (
-        <Container maxWidth="lg">
-            <Box
-                sx={{
-                    my: 4,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center"
-                }}
-            >
-                <Typography variant="h4" component="h1" gutterBottom>
-                    Material UI - Next.js example in TypeScript
-                </Typography>
-                <Link href="/about" color="secondary">
-                    Go to the about page
-                </Link>
-                <ProTip />
-                <Copyright />
-            </Box>
-        </Container>
+        <Paper sx={{ p: "2rem", m: "2rem" }}>
+            <Switch checked={mode === "dark"} onChange={toggleColorMode} />
+            <Typography align="center">Hello World</Typography>
+            <Button sx={{ mr: "1rem" }} variant="contained" color="primary" component={Link} href="/about">
+                Goto About
+            </Button>
+
+            <Button sx={{ mr: "1rem" }} color="primary" startIcon={<PhotoCamera />} variant="contained" component="label">
+                Upload
+                <input hidden accept="image/*" multiple type="file" />
+            </Button>
+            <IconButton color="primary" aria-label="upload picture" component="label">
+                <input hidden accept="image/*" type="file" />
+                <PhotoCamera />
+            </IconButton>
+        </Paper>
     );
 }
